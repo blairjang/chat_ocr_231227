@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <link rel="stylesheet" href = "{% static 'css/style.css' %}">        
+    </head>
+    <body>
+        <div id="navbar">
+            <span>PYLOG</span>            
+            <a href="/posts/add" class="btn btn-primary"> 글작성 </a>
+        </div>
+        
+        <div id = "post-list">
+            <ul class = "posts">
+            {% for post in posts %}
+                <div>
+                    <li class = "post">
+                        <!--각각의 제목과 내용 나누어 표시-->
+                        <h2><a href="/posts/{{ post.id }}/">{{ post.title }}</a></h2>
+                        <!--{{post.id}}도 가능 : 상대경로 /posts/{{ post.id }}/ : 절대경로-->
+                        <p>{{ post.content }}</p>
+                        <!--post와 연결된 모든 comment Queryset-->
+                        <ul class = "comments">
+                            {% for comment in post.comment_set.all %}
+                                <li class="comment">{{comment.content}}</li>
+                            {% empty %}<!--post.comment_set.all에 순회할 항목이 없는 경우-->
+                                <li class="comment-empty">댓글이 없습니다</li>
+                            {% endfor %}
+                        </ul>
+                        {% if post.thumbnail %}
+                            <img src="{{ post.thumbnail.url }}" width=300 alt="">
+                        {% else %}
+                            <img src = "" alt="">
+                        {% endif %}
+                    </li>
+                </div>  
+            {% endfor %}
+            </ul>
+        </div>
+    </body>
+</html>

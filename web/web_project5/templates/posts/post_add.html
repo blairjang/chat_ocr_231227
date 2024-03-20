@@ -1,0 +1,25 @@
+{% extends 'base_nav.html' %}
+
+{% block content %} 
+    
+    <div id = "post-add">
+        <h1> Post-add</h1>
+        
+        <!--file 전송할 것이므로 enctype 수정-->
+        <form method = "POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                <lable for="id_images">이미지</lable>
+                <input id="id_images" name="images" type="file" multiple>
+            </div>
+            {{ form.as_p }}
+            <div>
+                <lable for="id_tags">해시태그</lable>
+                <input id="id_tags" name="tags" type="text"
+                placeholder="쉼표(,)로 구분하여 여러 태그 입력">
+            </div>
+            <button type="submit">게시</button>
+        </form>
+    </div>
+
+{% endblock %}

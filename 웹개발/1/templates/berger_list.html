@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <body>
+        <h1>Hamberger의 버거리스트입니다</h1>
+        {% for berger in bergers %}
+            <div>
+                {{berger.name}}
+                (가격 : {{berger.price}}원,
+                칼로리 : {{berger.calories}}kcal)
+            </div>
+        {% endfor %}
+    </body>
+
+</html>
